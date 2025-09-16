@@ -21,31 +21,31 @@ const chairs = {
     'gaming': {
         name: '伝説のゲーミングチェア',
         description: '長時間の戦いに耐える、まさに勇者のための椅子。背中を支える独立したランバーサポートは、まるで回復魔法のようだ。',
-        image: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/gaming_chair.png',
+        image: 'https://m.media-amazon.com/images/I/71M+03gKpfL._AC_SX679_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2'
     },
     'ergonomic': {
         name: '賢者のエルゴノミクスチェア',
         description: '体を優しく包み込み、集中力を極限まで高める。研究や創造を求める賢者にふさわしい逸品だ。',
-        image: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/ergonomic_chair.png',
+        image: 'https://m.media-amazon.com/images/I/81qQcMFBkDL._AC_SY879_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A8%E3%83%AB%E3%82%B4%E3%83%8E%E3%83%9F%E3%82%AF%E3%82%B9%E3%83%81%E3%82%A7%E3%82%A2'
     },
     'lounge': {
         name: '癒やしのアームチェア',
         description: '冒険で疲れた体を癒やす、休息のための椅子。柔らかい座面とアームレストが、深い眠りへと誘う。',
-        image: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/lounge_chair.png',
+        image: 'https://m.media-amazon.com/images/I/71bB+3PYmpL._AC_SY300_SX300_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%BC%E3%83%A0%E3%83%81%E3%82%A7%E3%82%A2'
     },
     'dining': {
         name: '食卓の王者の椅子',
         description: '家族や仲間と食事を囲む、楽しい時間を彩る椅子。耐久性に優れ、おもてなしの心を感じさせる。',
-        image: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/dining_chair.png',
+        image: 'https://m.media-amazon.com/images/I/71RiXfIs-aL.__AC_SX300_SY300_QL70_ML2_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%83%80%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2'
     },
     'wood': {
         name: '森の精霊のウッドチェア',
         description: '自然の温もりを感じる、木製の椅子。シンプルながらも、使うほどに味わいが深まる。',
-        image: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/wood_chair.png',
+        image: 'https://m.media-amazon.com/images/I/71ZVvvXAx0L.__AC_SX300_SY300_QL70_ML2_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E6%9C%A8%E8%A3%BD%E3%83%81%E3%82%A7%E3%82%A2'
     }
 };
@@ -59,7 +59,7 @@ const quests = {
             { text: '休息と回復のために、ゆったりと体を預ける椅子（リラックス用）', next: 'purpose-relax' },
             { text: '食事の時間を楽しむための、みんなで囲める椅子（ダイニング用）', next: 'purpose-dining' }
         ],
-        bg: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/town.png',
+        bg: 'https://img2.lancers.jp/portfolio/308690/1677623/d6c7e9c6e1bac39c0faa7f83822c17599a79b427c6d7c4dfd258409db1bd7e5d/15613329_1000_0.png',
         character: 'king' // 王様を表示
     },
     'purpose-work': {
@@ -69,7 +69,7 @@ const quests = {
             { text: '10,000〜50,000ゴールド（中間）', next: 'result-ergonomic' },
             { text: '50,000ゴールド以上（高価）', next: 'result-ergonomic' }
         ],
-        bg: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/merchant_bg.png', // 商人の背景
+        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg', // 商人の背景
         character: 'merchant' // 商人を表示
     },
     'purpose-relax': {
@@ -78,7 +78,7 @@ const quests = {
             { text: '木のぬくもりを感じる素材', next: 'result-wood' },
             { text: '布の柔らかさを求める素材', next: 'result-lounge' }
         ],
-        bg: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/forest.png',
+        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
         character: 'wizard' // 魔法使いを表示
     },
     'purpose-dining': {
@@ -87,7 +87,7 @@ const quests = {
             { text: 'シンプルで丈夫な椅子', next: 'result-dining' },
             { text: '背もたれが高く、ゆったり座れる椅子', next: 'result-wood' }
         ],
-        bg: 'https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/img/town.png',
+        bg: 'https://t4.ftcdn.net/jpg/01/43/74/71/360_F_143747111_shWPZFZARFvYVWKpgX2r7e4tK8LVtuJb.jpg',
         character: 'king' // 王様を表示
     },
     'result-gaming': { result: 'gaming' },
