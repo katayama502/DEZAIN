@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
 </head>
 <body>
 
@@ -49,6 +51,23 @@
                     <p class="result-text" id="chair-name"></p>
                     <p class="result-text" id="chair-description"></p>
                 </div>
+            </div>
+            <div class="ar-container" id="ar-container">
+                <model-viewer
+                    id="chair-ar-viewer"
+                    class="ar-viewer"
+                    src=""
+                    alt="椅子の3Dモデル"
+                    camera-controls
+                    auto-rotate
+                    shadow-intensity="1"
+                    ar
+                    ar-modes="webxr scene-viewer quick-look"
+                    ar-placement="floor"
+                    ar-scale="auto">
+                    <button slot="ar-button" class="choice-button ar-button">ARで配置する</button>
+                </model-viewer>
+                <p class="ar-description" id="ar-description">スマートフォンを動かして、お部屋に椅子を配置してみよう。</p>
             </div>
             <div class="choice-container">
                 <a id="purchase-link" href="#" target="_blank" class="choice-button purchase-button">購入ページへ</a>

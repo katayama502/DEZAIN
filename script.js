@@ -15,38 +15,71 @@ const bgm = document.getElementById('bgm');
 const sfxSelect = document.getElementById('sfx-select'); // 効果音要素を追加
 const heroSceneSprite = document.getElementById('hero-sprite');
 const chairSceneSprite = document.getElementById('chair-sprite');
+const arContainer = document.getElementById('ar-container');
+const chairArViewer = document.getElementById('chair-ar-viewer');
+const arDescription = document.getElementById('ar-description');
 
-// 椅子データ (変更なし)
+// 椅子データ
 const chairs = {
     'gaming': {
         name: '伝説のゲーミングチェア',
         description: '長時間の戦いに耐える、まさに勇者のための椅子。背中を支える独立したランバーサポートは、まるで回復魔法のようだ。',
         image: 'https://m.media-amazon.com/images/I/71M+03gKpfL._AC_SX679_.jpg',
-        purchase: 'https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2'
+        purchase: 'https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2',
+        ar: {
+            src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
+            iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
+            alt: 'ゲーミングチェアの3Dモデル',
+            hint: '床を映してARボタンを押すとゲーミングチェアを設置できます。'
+        }
     },
     'ergonomic': {
         name: '賢者のエルゴノミクスチェア',
         description: '体を優しく包み込み、集中力を極限まで高める。研究や創造を求める賢者にふさわしい逸品だ。',
         image: 'https://m.media-amazon.com/images/I/81qQcMFBkDL._AC_SY879_.jpg',
-        purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A8%E3%83%AB%E3%82%B4%E3%83%8E%E3%83%9F%E3%82%AF%E3%82%B9%E3%83%81%E3%82%A7%E3%82%A2'
+        purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A8%E3%83%AB%E3%82%B4%E3%83%8E%E3%83%9F%E3%82%AF%E3%82%B9%E3%83%81%E3%82%A7%E3%82%A2',
+        ar: {
+            src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
+            iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
+            alt: 'エルゴノミクスチェアの3Dモデル',
+            hint: '明るい場所で床を映すと賢者の椅子が現れます。'
+        }
     },
     'lounge': {
         name: '癒やしのアームチェア',
         description: '冒険で疲れた体を癒やす、休息のための椅子。柔らかい座面とアームレストが、深い眠りへと誘う。',
         image: 'https://m.media-amazon.com/images/I/71bB+3PYmpL._AC_SY300_SX300_.jpg',
-        purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%BC%E3%83%A0%E3%83%81%E3%82%A7%E3%82%A2'
+        purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%BC%E3%83%A0%E3%83%81%E3%82%A7%E3%82%A2',
+        ar: {
+            src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
+            iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
+            alt: 'アームチェアの3Dモデル',
+            hint: 'お部屋の空間にリラックスチェアを置いて雰囲気をチェックしよう。'
+        }
     },
     'dining': {
         name: '食卓の王者の椅子',
         description: '家族や仲間と食事を囲む、楽しい時間を彩る椅子。耐久性に優れ、おもてなしの心を感じさせる。',
         image: 'https://m.media-amazon.com/images/I/71RiXfIs-aL.__AC_SX300_SY300_QL70_ML2_.jpg',
-        purchase: 'https://www.amazon.co.jp/s?k=%E3%83%80%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2'
+        purchase: 'https://www.amazon.co.jp/s?k=%E3%83%80%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2',
+        ar: {
+            src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
+            iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
+            alt: 'ダイニングチェアの3Dモデル',
+            hint: 'テーブル周りに置いて食卓の雰囲気をイメージしてみましょう。'
+        }
     },
     'wood': {
         name: '森の精霊のウッドチェア',
         description: '自然の温もりを感じる、木製の椅子。シンプルながらも、使うほどに味わいが深まる。',
         image: 'https://m.media-amazon.com/images/I/71ZVvvXAx0L.__AC_SX300_SY300_QL70_ML2_.jpg',
-        purchase: 'https://www.amazon.co.jp/s?k=%E6%9C%A8%E8%A3%BD%E3%83%81%E3%82%A7%E3%82%A2'
+        purchase: 'https://www.amazon.co.jp/s?k=%E6%9C%A8%E8%A3%BD%E3%83%81%E3%82%A7%E3%82%A2',
+        ar: {
+            src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
+            iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
+            alt: '木製チェアの3Dモデル',
+            hint: '木目の質感をARでじっくり確認してみましょう。'
+        }
     }
 };
 
@@ -196,9 +229,11 @@ function showResult(chairId) {
     chairName.textContent = `【名前】 ${chair.name}`;
     chairDescription.textContent = `【特徴】 ${chair.description}`;
     purchaseLink.href = chair.purchase;
-    
+
     purchaseLink.style.display = 'block';
-    
+
+    updateArExperience(chair);
+
     // キャラクターを非表示
     characterSpriteContainer.innerHTML = '';
 }
@@ -212,6 +247,7 @@ function restartGame() {
     if (typingInterval) {
         clearInterval(typingInterval);
     }
+    resetArExperience();
     // スタート画面の王様表示をリセット
     document.querySelector('.sprite.king.start-king').style.display = 'block';
 }
@@ -220,4 +256,46 @@ function restartGame() {
 function playSfxSelect() {
     sfxSelect.currentTime = 0; // 再生位置を先頭に戻す
     sfxSelect.play();
+}
+
+function updateArExperience(chair) {
+    if (!arContainer || !chairArViewer) {
+        return;
+    }
+
+    if (!chair || !chair.ar || !chair.ar.src) {
+        resetArExperience();
+        return;
+    }
+
+    chairArViewer.src = chair.ar.src;
+    chairArViewer.alt = chair.ar.alt || `${chair.name}の3Dモデル`;
+    chairArViewer.setAttribute('poster', chair.image || '');
+
+    if (chair.ar.iosSrc) {
+        chairArViewer.setAttribute('ios-src', chair.ar.iosSrc);
+    } else {
+        chairArViewer.removeAttribute('ios-src');
+    }
+
+    if (arDescription) {
+        arDescription.textContent = chair.ar.hint || 'スマートフォンを動かして、お部屋に配置してみましょう。';
+    }
+
+    arContainer.style.display = 'flex';
+}
+
+function resetArExperience() {
+    if (!arContainer || !chairArViewer) {
+        return;
+    }
+
+    arContainer.style.display = 'none';
+    chairArViewer.removeAttribute('src');
+    chairArViewer.removeAttribute('poster');
+    chairArViewer.removeAttribute('ios-src');
+
+    if (arDescription) {
+        arDescription.textContent = 'スマートフォンを動かして、お部屋に椅子を配置してみよう。';
+    }
 }
