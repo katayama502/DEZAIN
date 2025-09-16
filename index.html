@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドラゴンチェアイアの伝説</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <audio id="bgm" src="https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/audio/bgm.mp3" autoplay loop></audio>
+    <audio id="sfx-select" src="https://raw.githubusercontent.com/hiro-git-jp/dq-style-rpg-chair-quest/main/audio/sfx.mp3"></audio>
+
+
+    <div class="app-container">
+        
+        <div id="start-screen" class="game-screen active">
+            <h1 class="title">ドラゴンチェアイアの伝説</h1>
+            <div class="sprite king start-king"></div> <div class="message-box">
+                <p class="message-text">おお、勇者よ！伝説の椅子を探してほしいのじゃ！</p>
+                <div class="choice-container">
+                    <button class="choice-button" onclick="startGame()">はい</button>
+                    <button class="choice-button" onclick="alert('またの機会に！')">いいえ</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-screen" class="game-screen">
+            <div class="background-image" id="background"></div>
+            <div id="character-sprite-container"></div> <div class="message-box">
+                <p class="message-text" id="quest-text"></p>
+                <div class="choice-container" id="choice-buttons"></div>
+            </div>
+        </div>
+
+        <div id="result-screen" class="game-screen">
+            <h2 class="title" id="result-title"></h2>
+            <div class="result-box">
+                <img id="chair-image" src="" alt="伝説の椅子" class="chair-image">
+                <div class="result-details">
+                    <p class="result-text" id="chair-name"></p>
+                    <p class="result-text" id="chair-description"></p>
+                </div>
+            </div>
+            <div class="choice-container">
+                <a id="purchase-link" href="#" target="_blank" class="choice-button purchase-button">購入ページへ</a>
+                <button class="choice-button" onclick="restartGame()">最初からやり直す</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
