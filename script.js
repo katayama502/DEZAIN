@@ -13,6 +13,8 @@ const chairDescription = document.getElementById('chair-description');
 const purchaseLink = document.getElementById('purchase-link');
 const bgm = document.getElementById('bgm');
 const sfxSelect = document.getElementById('sfx-select'); // 効果音要素を追加
+const heroSceneSprite = document.getElementById('hero-sprite');
+const chairSceneSprite = document.getElementById('chair-sprite');
 
 // 椅子データ (変更なし)
 const chairs = {
@@ -123,6 +125,8 @@ function loadQuest(questId) {
         return;
     }
 
+    animateHeroAndChair();
+
     // 古いタイピングアニメーションをクリア
     if (typingInterval) {
         clearInterval(typingInterval);
@@ -165,6 +169,21 @@ function loadQuest(questId) {
         button.onclick = () => loadQuest(choice.next);
         choiceButtonsContainer.appendChild(button);
     });
+}
+
+function animateHeroAndChair() {
+    if (!heroSceneSprite || !chairSceneSprite) {
+        return;
+    }
+
+    heroSceneSprite.classList.remove('animate');
+    chairSceneSprite.classList.remove('animate');
+
+    // Reflow to restart the animation
+    void heroSceneSprite.offsetWidth;
+
+    heroSceneSprite.classList.add('animate');
+    chairSceneSprite.classList.add('animate');
 }
 
 // 結果画面の表示
