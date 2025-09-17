@@ -1,9 +1,19 @@
+:root {
+    --app-viewport-height: 100vh;
+}
+
+@supports (height: 100dvh) {
+    :root {
+        --app-viewport-height: 100dvh;
+    }
+}
+
 body {
     background-color: #383838;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     font-family: 'DotGothic16', monospace;
     color: #fff;
@@ -12,10 +22,8 @@ body {
 }
 
 .app-container {
-    width: 90vmin;
-    max-width: 600px;
-    height: 90vmin;
-    max-height: 800px;
+    width: clamp(320px, 90vmin, 600px);
+    height: clamp(560px, var(--app-viewport-height), 800px);
     position: relative;
     border: 4px solid #fff;
     box-shadow: 0 0 15px #000;
@@ -37,6 +45,7 @@ body {
     box-sizing: border-box;
     background-size: cover;
     background-position: center;
+    overflow-y: auto;
     transition: opacity 0.5s ease;
     opacity: 0;
 }
