@@ -132,12 +132,45 @@ const quests = {
 
 let currentQuest = 'start';
 let typingInterval; // タイピングアニメーションのsetIntervalを保持するための変数
+let bgmInitialized = false;
 
-// 音楽の自動再生
-document.addEventListener('DOMContentLoaded', () => {
+function tryPlayBgm() {
+    if (!bgm || bgmInitialized) {
+        return;
+    }
+
     bgm.volume = 0.5;
-    bgm.play().catch(e => {
-        console.log("ユーザーの操作がないためBGMが自動再生できませんでした。");
+
+    const playPromise = bgm.play();
+    if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+            bgmInitialized = true;
+            removeBgmInteractionListeners();
+        }).catch(() => {
+            console.log('ユーザーの操作がないためBGMが再生できませんでした。');
+        });
+    } else {
+        bgmInitialized = true;
+        removeBgmInteractionListeners();
+    }
+}
+
+const bgmInteractionEvents = ['click', 'touchstart', 'keydown'];
+
+function handleBgmInteraction() {
+    tryPlayBgm();
+}
+
+function removeBgmInteractionListeners() {
+    bgmInteractionEvents.forEach(event => {
+        document.removeEventListener(event, handleBgmInteraction);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    tryPlayBgm();
+    bgmInteractionEvents.forEach(event => {
+        document.addEventListener(event, handleBgmInteraction, { once: false });
     });
 });
 
@@ -145,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function startGame() {
     startScreen.classList.remove('active');
     gameScreen.classList.add('active');
+    tryPlayBgm();
     loadQuest(currentQuest);
 }
 
