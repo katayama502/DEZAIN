@@ -96,32 +96,151 @@ const quests = {
         character: 'king' // 王様を表示
     },
     'purpose-work': {
-        text: 'ふむ、作業用の椅子か。どのくらいのゴールドを費やせるかの？',
+        text: '作業用の椅子を求め、王国の知と技が集う街へ向かうのじゃ。どこから調査を始める？',
+        choices: [
+            { text: '王立図書館で魔導書をひもとく', next: 'work-trial-library' },
+            { text: '鍛冶ギルドの工房で職人に相談する', next: 'work-trial-forge' }
+        ],
+        bg: 'https://img2.lancers.jp/portfolio/308690/1677623/d6c7e9c6e1bac39c0faa7f83822c17599a79b427c6d7c4dfd258409db1bd7e5d/15613329_1000_0.png',
+        character: 'king'
+    },
+    'work-trial-library': {
+        text: '静まり返った図書館で、賢者が君を待っている。どの学びを選ぶ？',
+        choices: [
+            { text: '宮廷魔術師の集中講義を受ける', next: 'work-budget-mentor' },
+            { text: '研究仲間と共に討論に明け暮れる', next: 'work-budget-ally' }
+        ],
+        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
+        character: 'wizard'
+    },
+    'work-trial-forge': {
+        text: '火花散る鍛冶ギルド。筋骨隆々の職人が姿勢の鍛え方を指南してくれる。どうする？',
+        choices: [
+            { text: '頑丈さ重視で装備を整える', next: 'work-budget-guild' },
+            { text: '姿勢矯正の訓練で体を鍛える', next: 'work-budget-guild' }
+        ],
+        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
+        character: 'merchant'
+    },
+    'work-budget-mentor': {
+        text: '賢者の教えは貴重だが、予算も大切だ。どれほどゴールドを費やす？',
         choices: [
             { text: '10,000ゴールド未満（安価）', next: 'result-gaming' },
-            { text: '10,000〜50,000ゴールド（中間）', next: 'result-ergonomic' },
-            { text: '50,000ゴールド以上（高価）', next: 'result-ergonomic' }
+            { text: '10,000〜50,000ゴールド（集中力重視）', next: 'result-ergonomic' },
+            { text: '50,000ゴールド以上（最高の座り心地）', next: 'result-ergonomic' }
         ],
-        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg', // 商人の背景
-        character: 'merchant' // 商人を表示
+        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
+        character: 'wizard'
+    },
+    'work-budget-ally': {
+        text: '仲間の協力で装備をそろえる。皆で出し合えるのはどのくらい？',
+        choices: [
+            { text: '10,000ゴールド未満（安価）', next: 'result-gaming' },
+            { text: '10,000〜50,000ゴールド（バランス重視）', next: 'result-ergonomic' },
+            { text: '50,000ゴールド以上（最高級を求める）', next: 'result-ergonomic' }
+        ],
+        bg: 'https://img2.lancers.jp/portfolio/308690/1677623/d6c7e9c6e1bac39c0faa7f83822c17599a79b427c6d7c4dfd258409db1bd7e5d/15613329_1000_0.png',
+        character: 'king'
+    },
+    'work-budget-guild': {
+        text: '鍛冶ギルドの親方が素材を並べてくれた。どの装備を選ぶ？',
+        choices: [
+            { text: '10,000ゴールド未満（手軽なセット）', next: 'result-gaming' },
+            { text: '10,000〜50,000ゴールド（実戦向けセット）', next: 'result-ergonomic' },
+            { text: '50,000ゴールド以上（王家の特注品）', next: 'result-ergonomic' }
+        ],
+        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
+        character: 'merchant'
     },
     'purpose-relax': {
-        text: 'リラックス用の椅子か。どのような素材が良いかの？',
+        text: '癒やしを求め、王都を離れて大自然へ。どの道を行く？',
         choices: [
-            { text: '木のぬくもりを感じる素材', next: 'result-wood' },
-            { text: '布の柔らかさを求める素材', next: 'result-lounge' }
+            { text: '森を抜けて精霊の泉を目指す', next: 'relax-journey-forest' },
+            { text: '海沿いの温泉郷へ旅立つ', next: 'relax-journey-seaside' }
         ],
         bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
         character: 'wizard' // 魔法使いを表示
     },
-    'purpose-dining': {
-        text: '食事用の椅子か。どんなタイプが良いかの？',
+    'relax-journey-forest': {
+        text: '森の精霊がきらめく泉に到着。精霊たちが座り心地について囁いてくる。どの声に耳を傾ける？',
         choices: [
-            { text: 'シンプルで丈夫な椅子', next: 'result-dining' },
-            { text: '背もたれが高く、ゆったり座れる椅子', next: 'result-wood' }
+            { text: '木の香りをまとった風の声', next: 'relax-material-woodland' },
+            { text: '柔らかな霧の歌声', next: 'relax-material-calm' }
+        ],
+        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
+        character: 'wizard'
+    },
+    'relax-journey-seaside': {
+        text: '潮騒が響く温泉郷。旅館の女将が休息の極意を伝授してくれる。どうくつろぐ？',
+        choices: [
+            { text: '木のぬくもりで心身を温める', next: 'relax-material-woodland' },
+            { text: 'ふかふかの座面でとろける', next: 'relax-material-calm' }
+        ],
+        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
+        character: 'king'
+    },
+    'relax-material-woodland': {
+        text: '自然と調和する椅子を選ぶなら、どんな木の表情が好きだ？',
+        choices: [
+            { text: '素朴で飾らない木肌', next: 'result-wood' },
+            { text: '温かみのある木目と布の組み合わせ', next: 'result-lounge' }
+        ],
+        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
+        character: 'wizard'
+    },
+    'relax-material-calm': {
+        text: '全身を包み込むようなくつろぎ方を想像せよ。どの感触が心を癒やす？',
+        choices: [
+            { text: '包み込むような布のクッション', next: 'result-lounge' },
+            { text: '木のフレームでしっかり支える', next: 'result-wood' }
+        ],
+        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
+        character: 'king'
+    },
+    'purpose-dining': {
+        text: '王国の宴に招かれた君は、食卓を彩る椅子を探す旅へ出る。まずはどこを訪ねる？',
+        choices: [
+            { text: '城下町の賑やかな市場', next: 'dining-journey-market' },
+            { text: '城の庭園で開かれる晩餐会', next: 'dining-journey-garden' }
         ],
         bg: 'https://t4.ftcdn.net/jpg/01/43/74/71/360_F_143747111_shWPZFZARFvYVWKpgX2r7e4tK8LVtuJb.jpg',
         character: 'king' // 王様を表示
+    },
+    'dining-journey-market': {
+        text: '市場では各地の料理人が椅子自慢をしている。どの職人の声を信じる？',
+        choices: [
+            { text: '職人肌の鍛冶屋が作るシンプル椅子', next: 'dining-style-hearty' },
+            { text: '宮廷料理人が薦める優雅な椅子', next: 'dining-style-noble' }
+        ],
+        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
+        character: 'merchant'
+    },
+    'dining-journey-garden': {
+        text: '庭園では王家の晩餐が始まろうとしている。どの席に座りたい？',
+        choices: [
+            { text: '騎士団の円卓で語らう席', next: 'dining-style-hearty' },
+            { text: '王妃の特等席で優雅に過ごす', next: 'dining-style-noble' }
+        ],
+        bg: 'https://t4.ftcdn.net/jpg/01/43/74/71/360_F_143747111_shWPZFZARFvYVWKpgX2r7e4tK8LVtuJb.jpg',
+        character: 'king'
+    },
+    'dining-style-hearty': {
+        text: '仲間と肩を並べるなら実用性も大切だ。どんな座り心地を選ぶ？',
+        choices: [
+            { text: '丈夫で扱いやすい椅子', next: 'result-dining' },
+            { text: '木の背もたれで落ち着く椅子', next: 'result-wood' }
+        ],
+        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
+        character: 'merchant'
+    },
+    'dining-style-noble': {
+        text: '晩餐会を華やかにするならば、どのような椅子が似合う？',
+        choices: [
+            { text: '背もたれの高い堂々とした椅子', next: 'result-wood' },
+            { text: '姿勢良く座れる上品な椅子', next: 'result-dining' }
+        ],
+        bg: 'https://t4.ftcdn.net/jpg/01/43/74/71/360_F_143747111_shWPZFZARFvYVWKpgX2r7e4tK8LVtuJb.jpg',
+        character: 'king'
     },
     'result-gaming': { result: 'gaming' },
     'result-ergonomic': { result: 'ergonomic' },
@@ -133,6 +252,10 @@ const quests = {
 let currentQuest = 'start';
 let typingInterval; // タイピングアニメーションのsetIntervalを保持するための変数
 let bgmInitialized = false;
+let textAudioContext = null;
+let lastTextSoundTime = 0;
+let textToneIndex = 0;
+const textToneFrequencies = [880, 988, 1046];
 
 function tryPlayBgm() {
     if (!bgm || bgmInitialized) {
@@ -159,6 +282,7 @@ const bgmInteractionEvents = ['click', 'touchstart', 'keydown'];
 
 function handleBgmInteraction() {
     tryPlayBgm();
+    initTextAudio();
 }
 
 function removeBgmInteractionListeners() {
@@ -169,6 +293,7 @@ function removeBgmInteractionListeners() {
 
 document.addEventListener('DOMContentLoaded', () => {
     tryPlayBgm();
+    initTextAudio();
     bgmInteractionEvents.forEach(event => {
         document.addEventListener(event, handleBgmInteraction, { once: false });
     });
@@ -179,11 +304,13 @@ function startGame() {
     startScreen.classList.remove('active');
     gameScreen.classList.add('active');
     tryPlayBgm();
+    initTextAudio();
     loadQuest(currentQuest);
 }
 
 // クエストを読み込んで表示
 function loadQuest(questId) {
+    initTextAudio();
     const quest = quests[questId];
     currentQuest = questId;
 
@@ -217,9 +344,14 @@ function loadQuest(questId) {
     const text = quest.text;
     questText.textContent = '';
     let i = 0;
+    textToneIndex = 0;
     typingInterval = setInterval(() => {
         if (i < text.length) {
-            questText.textContent += text.charAt(i);
+            const char = text.charAt(i);
+            questText.textContent += char;
+            if (char.trim()) {
+                playTextSound();
+            }
             i++;
         } else {
             clearInterval(typingInterval);
@@ -229,13 +361,15 @@ function loadQuest(questId) {
 
     // 選択肢の表示
     choiceButtonsContainer.innerHTML = '';
-    quest.choices.forEach(choice => {
-        const button = document.createElement('button');
-        button.className = 'choice-button';
-        button.textContent = choice.text;
-        button.onclick = () => loadQuest(choice.next);
-        choiceButtonsContainer.appendChild(button);
-    });
+    if (quest.choices) {
+        quest.choices.forEach(choice => {
+            const button = document.createElement('button');
+            button.className = 'choice-button';
+            button.textContent = choice.text;
+            button.onclick = () => loadQuest(choice.next);
+            choiceButtonsContainer.appendChild(button);
+        });
+    }
 }
 
 function animateHeroAndChair() {
@@ -281,6 +415,7 @@ function restartGame() {
     if (typingInterval) {
         clearInterval(typingInterval);
     }
+    textToneIndex = 0;
     resetArExperience();
     // スタート画面の王様表示をリセット
     document.querySelector('.sprite.king.start-king').style.display = 'block';
@@ -288,8 +423,70 @@ function restartGame() {
 
 // 効果音の再生
 function playSfxSelect() {
+    if (!sfxSelect) {
+        return;
+    }
+
     sfxSelect.currentTime = 0; // 再生位置を先頭に戻す
-    sfxSelect.play();
+    const playPromise = sfxSelect.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {
+            // ユーザー操作がない場合などに備えてエラーは握りつぶす
+        });
+    }
+}
+
+function initTextAudio() {
+    if (textAudioContext && textAudioContext.state === 'suspended') {
+        textAudioContext.resume().catch(() => {
+            // 再開できない場合は静かに失敗させる
+        });
+        return;
+    }
+
+    if (!textAudioContext) {
+        const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
+        if (typeof AudioContextConstructor !== 'function') {
+            return;
+        }
+        textAudioContext = new AudioContextConstructor();
+        if (textAudioContext.state === 'suspended') {
+            textAudioContext.resume().catch(() => {
+                // 初期化時に自動再生がブロックされても問題なし
+            });
+        }
+    }
+}
+
+function playTextSound() {
+    if (!textAudioContext || textAudioContext.state !== 'running') {
+        return;
+    }
+
+    const now = textAudioContext.currentTime;
+    if (now - lastTextSoundTime < 0.05) {
+        return;
+    }
+    lastTextSoundTime = now;
+
+    const oscillator = textAudioContext.createOscillator();
+    const gainNode = textAudioContext.createGain();
+
+    const frequency = textToneFrequencies[textToneIndex % textToneFrequencies.length];
+    textToneIndex++;
+
+    oscillator.type = 'square';
+    oscillator.frequency.setValueAtTime(frequency, now);
+
+    gainNode.gain.setValueAtTime(0.0001, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.18, now + 0.008);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(textAudioContext.destination);
+
+    oscillator.start(now);
+    oscillator.stop(now + 0.12);
 }
 
 function updateArExperience(chair) {
