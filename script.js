@@ -254,6 +254,8 @@ let typingInterval; // タイピングアニメーションのsetIntervalを保�
 let bgmInitialized = false;
 let textAudioContext = null;
 let lastTextSoundTime = 0;
+let textToneIndex = 0;
+const textToneFrequencies = [880, 988, 1046];
 
 function tryPlayBgm() {
     if (!bgm || bgmInitialized) {
@@ -308,6 +310,7 @@ function startGame() {
 
 // クエストを読み込んで表示
 function loadQuest(questId) {
+    initTextAudio();
     const quest = quests[questId];
     currentQuest = questId;
 
@@ -341,10 +344,14 @@ function loadQuest(questId) {
     const text = quest.text;
     questText.textContent = '';
     let i = 0;
+    textToneIndex = 0;
     typingInterval = setInterval(() => {
         if (i < text.length) {
-            questText.textContent += text.charAt(i);
-            playTextSound();
+            const char = text.charAt(i);
+            questText.textContent += char;
+            if (char.trim()) {
+                playTextSound();
+            }
             i++;
         } else {
             clearInterval(typingInterval);
@@ -408,6 +415,7 @@ function restartGame() {
     if (typingInterval) {
         clearInterval(typingInterval);
     }
+    textToneIndex = 0;
     resetArExperience();
     // スタート画面の王様表示をリセット
     document.querySelector('.sprite.king.start-king').style.display = 'block';
@@ -464,18 +472,21 @@ function playTextSound() {
     const oscillator = textAudioContext.createOscillator();
     const gainNode = textAudioContext.createGain();
 
+    const frequency = textToneFrequencies[textToneIndex % textToneFrequencies.length];
+    textToneIndex++;
+
     oscillator.type = 'square';
-    oscillator.frequency.setValueAtTime(820, now);
+    oscillator.frequency.setValueAtTime(frequency, now);
 
     gainNode.gain.setValueAtTime(0.0001, now);
-    gainNode.gain.exponentialRampToValueAtTime(0.12, now + 0.01);
-    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+    gainNode.gain.exponentialRampToValueAtTime(0.18, now + 0.008);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
 
     oscillator.connect(gainNode);
     gainNode.connect(textAudioContext.destination);
 
     oscillator.start(now);
-    oscillator.stop(now + 0.15);
+    oscillator.stop(now + 0.12);
 }
 
 function updateArExperience(chair) {
