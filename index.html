@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomQuest</title>
+    <title>Island RoomQuest</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+Rounded+1c:wght@500&display=swap" rel="stylesheet">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
 </head>
@@ -20,12 +20,14 @@
     <div class="app-container">
         
         <div id="start-screen" class="game-screen active">
-            <h1 class="title">RoomQuest</h1>
-            <div class="sprite king start-king"></div> <div class="message-box">
-                <p class="message-text">おお、勇者よ！伝説の椅子を探してほしいのじゃ！</p>
+            <h1 class="title">Island RoomQuest</h1>
+            <div class="sprite tanuki start-character"></div>
+            <div class="message-box">
+                <p class="message-text">やあやあ、島のインテリア相談所へようこそだなも！
+たぬきちといっしょに、ぴったりのイスを探してみよう。</p>
                 <div class="choice-container">
-                    <button class="choice-button" onclick="startGame()">はい</button>
-                    <button class="choice-button" onclick="alert('またの機会に！')">いいえ</button>
+                    <button class="choice-button" onclick="startGame()">はじめる</button>
+                    <button class="choice-button" onclick="alert('いつでも相談してね！')">またあとで</button>
                 </div>
             </div>
         </div>
@@ -67,7 +69,7 @@
                     ar-scale="auto">
                     <button slot="ar-button" class="choice-button ar-button">ARで配置する</button>
                 </model-viewer>
-                <p class="ar-description" id="ar-description">スマートフォンを動かして、お部屋に椅子を配置してみよう。</p>
+                <p class="ar-description" id="ar-description">スマートフォンを動かして、島のお部屋にイスを置いてみよう。</p>
             </div>
             <div class="choice-container">
                 <a id="purchase-link" href="#" target="_blank" class="choice-button purchase-button">購入ページへ</a>

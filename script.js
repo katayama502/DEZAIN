@@ -18,229 +18,170 @@ const chairSceneSprite = document.getElementById('chair-sprite');
 const arContainer = document.getElementById('ar-container');
 const chairArViewer = document.getElementById('chair-ar-viewer');
 const arDescription = document.getElementById('ar-description');
+const startCharacter = document.querySelector('.sprite.start-character');
 
 // 椅子データ
 const chairs = {
     'gaming': {
-        name: '伝説のゲーミングチェア',
-        description: '長時間の戦いに耐える、まさに勇者のための椅子。背中を支える独立したランバーサポートは、まるで回復魔法のようだ。',
+        name: 'ほしぞらゲーミングチェア',
+        description: 'ライトのきらめきで島の夜時間もワクワク。姿勢を支えながら配信やゲームを楽しめるよ。',
         image: 'https://m.media-amazon.com/images/I/71M+03gKpfL._AC_SX679_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2',
         ar: {
             src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
             iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
             alt: 'ゲーミングチェアの3Dモデル',
-            hint: '床を映してARボタンを押すとゲーミングチェアを設置できます。'
+            hint: 'カラフルなライトで島の夜を彩ってみよう。'
         }
     },
     'ergonomic': {
-        name: '賢者のエルゴノミクスチェア',
-        description: '体を優しく包み込み、集中力を極限まで高める。研究や創造を求める賢者にふさわしい逸品だ。',
+        name: 'しまカフェ・エルゴチェア',
+        description: '背中にフィットして姿勢を整えてくれる頼れる存在。長時間の作業でも島時間が心地よく過ごせるよ。',
         image: 'https://m.media-amazon.com/images/I/81qQcMFBkDL._AC_SY879_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A8%E3%83%AB%E3%82%B4%E3%83%8E%E3%83%9F%E3%82%AF%E3%82%B9%E3%83%81%E3%82%A7%E3%82%A2',
         ar: {
             src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
             iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
             alt: 'エルゴノミクスチェアの3Dモデル',
-            hint: '明るい場所で床を映すと賢者の椅子が現れます。'
+            hint: 'デスク周りに合わせて角度をチェックしてみてね。'
         }
     },
     'lounge': {
-        name: '癒やしのアームチェア',
-        description: '冒険で疲れた体を癒やす、休息のための椅子。柔らかい座面とアームレストが、深い眠りへと誘う。',
+        name: 'おひるねアームチェア',
+        description: 'ふかふかクッションで、読みかけの本も島の風もたっぷり楽しめるくつろぎチェア。',
         image: 'https://m.media-amazon.com/images/I/71bB+3PYmpL._AC_SY300_SX300_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%BC%E3%83%A0%E3%83%81%E3%82%A7%E3%82%A2',
         ar: {
             src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
             iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
             alt: 'アームチェアの3Dモデル',
-            hint: 'お部屋の空間にリラックスチェアを置いて雰囲気をチェックしよう。'
+            hint: 'お気に入りの音楽を流しながら配置してみよう。'
         }
     },
     'dining': {
-        name: '食卓の王者の椅子',
-        description: '家族や仲間と食事を囲む、楽しい時間を彩る椅子。耐久性に優れ、おもてなしの心を感じさせる。',
+        name: 'みんなでダイニングチェア',
+        description: 'テーブルを囲む時間がもっと楽しくなる、扱いやすくてしっかり者のチェア。',
         image: 'https://m.media-amazon.com/images/I/71RiXfIs-aL.__AC_SX300_SY300_QL70_ML2_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E3%83%80%E3%82%A4%E3%83%8B%E3%83%B3%E3%82%B0%E3%83%81%E3%82%A7%E3%82%A2',
         ar: {
             src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
             iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
             alt: 'ダイニングチェアの3Dモデル',
-            hint: 'テーブル周りに置いて食卓の雰囲気をイメージしてみましょう。'
+            hint: 'テーブルの高さに合わせてぐるっと見回してみてね。'
         }
     },
     'wood': {
-        name: '森の精霊のウッドチェア',
-        description: '自然の温もりを感じる、木製の椅子。シンプルながらも、使うほどに味わいが深まる。',
+        name: 'もりのウッドチェア',
+        description: '木の香りとやさしい手ざわりで、島暮らしをほっと落ち着かせてくれるチェア。',
         image: 'https://m.media-amazon.com/images/I/71ZVvvXAx0L.__AC_SX300_SY300_QL70_ML2_.jpg',
         purchase: 'https://www.amazon.co.jp/s?k=%E6%9C%A8%E8%A3%BD%E3%83%81%E3%82%A7%E3%82%A2',
         ar: {
             src: 'https://modelviewer.dev/shared-assets/models/Chair.glb',
             iosSrc: 'https://modelviewer.dev/shared-assets/models/Chair.usdz',
             alt: '木製チェアの3Dモデル',
-            hint: '木目の質感をARでじっくり確認してみましょう。'
+            hint: '木目の雰囲気をじっくり確認して島の空気になじませよう。'
         }
     }
+};
+
+const islandBackgrounds = {
+    plaza: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InNreSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNiZGU4ZmYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZGY2ZWMiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JvdW5kIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzllZGJiNyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzZiYmQ4YSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI2NDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ1cmwoI3NreSkiLz48cmVjdCB5PSIzNjAiIHdpZHRoPSI2NDAiIGhlaWdodD0iMjgwIiBmaWxsPSJ1cmwoI2dyb3VuZCkiLz48cGF0aCBkPSJNMCAzNjAgUTE2MCAzMjAgMzIwIDM2MCBUNjQwIDM2MCBWNDAwIEgwIFoiIGZpbGw9IiNmN2Q5YTciIG9wYWNpdHk9IjAuNiIvPjxnIG9wYWNpdHk9IjAuNSI+PGNpcmNsZSBjeD0iMTIwIiBjeT0iNDQwIiByPSI5MCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjIyMCIgY3k9IjQzMCIgcj0iNzAiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI1MjAiIGN5PSI0NTAiIHI9IjEyMCIgZmlsbD0iI2ZmZiIvPjwvZz48ZyBvcGFjaXR5PSIwLjgiPjxwYXRoIGQ9Ik0zNDAgMzYwIGw0MCAtNjAgNDAgNjAgeiIgZmlsbD0iIzllZGJiNyIvPjxwYXRoIGQ9Ik00MjAgMzYwIGwzNSAtNTAgMzUgNTAgeiIgZmlsbD0iIzhhY2U5ZSIvPjxwYXRoIGQ9Ik00ODAgMzYwIGwzMCAtNDUgMzAgNDUgeiIgZmlsbD0iIzdlYzU5MCIvPjwvZz48Y2lyY2xlIGN4PSI4MCIgY3k9IjEyMCIgcj0iNDAiIGZpbGw9IiNmZmY3YzIiIG9wYWNpdHk9IjAuNyIvPjwvc3ZnPg==',
+    workshop: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9IndhbGwiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZjdmMWU5Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZjFlNGQwIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImZsb29yIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y5ZDdhYSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Q5YTM2YSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSI2NDAiIGhlaWdodD0iNDIwIiBmaWxsPSJ1cmwoI3dhbGwpIi8+PHJlY3QgeT0iNDIwIiB3aWR0aD0iNjQwIiBoZWlnaHQ9IjIyMCIgZmlsbD0idXJsKCNmbG9vcikiLz48ZyBvcGFjaXR5PSIwLjMiPjxyZWN0IHg9IjQwIiB5PSIxMjAiIHdpZHRoPSIxMjAiIGhlaWdodD0iMTYwIiByeD0iMTIiIGZpbGw9IiM4OGM5ZmYiLz48cmVjdCB4PSIyMDAiIHk9IjEwMCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxODAiIHJ4PSIxNCIgZmlsbD0iI2ZmY2Y4NSIvPjxyZWN0IHg9IjQwMCIgeT0iMTQwIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE1MCIgcng9IjEyIiBmaWxsPSIjYTBkOGIzIi8+PC9nPjxnIG9wYWNpdHk9IjAuMiI+PHBhdGggZD0iTTAgNDIwIGw4MCAtMjAgODAgMjAgODAgLTIwIDgwIDIwIDgwIC0yMCA4MCAyMCA4MCAtMjAgODAgMjAgVjY0MCBIMCBaIiBmaWxsPSIjYzI4NzU1Ii8+PC9nPjxjaXJjbGUgY3g9IjUwMCIgY3k9IjkwIiByPSI0MCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjUyMCIgY3k9IjgwIiByPSIyMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC41Ii8+PC9zdmc+',
+    coast: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NDAiIGhlaWdodD0iNjQwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InNreTIiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZDRmMGZmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmOWU2Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9InNlYSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZGQ4ZmYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzZmI0ZTUiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0ic2FuZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZmU3YjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmNGM5ODYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iNjQwIiBoZWlnaHQ9IjM2MCIgZmlsbD0idXJsKCNza3kyKSIvPjxyZWN0IHk9IjIyMCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIxODAiIGZpbGw9InVybCgjc2VhKSIvPjxwYXRoIGQ9Ik0wIDM2MCBRMTYwIDMyMCAzMjAgMzQwIFQ2NDAgMzIwIFY0MjAgSDAgWiIgZmlsbD0iI2ZmZTdiOCIvPjxyZWN0IHk9IjM2MCIgd2lkdGg9IjY0MCIgaGVpZ2h0PSIyODAiIGZpbGw9InVybCgjc2FuZCkiLz48ZyBvcGFjaXR5PSIwLjYiPjxjaXJjbGUgY3g9IjE0MCIgY3k9IjQyMCIgcj0iNDAiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxOTAiIGN5PSI0MTAiIHI9IjI4IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iNDUwIiBjeT0iMjMwIiByPSI1MCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjQ4MCIgY3k9IjIxMCIgcj0iNDAiIGZpbGw9IiNmZmYiLz48L2c+PGcgb3BhY2l0eT0iMC41Ij48cGF0aCBkPSJNNjAgMzYwIGwzMCA0MCA0MCAtNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNNTIwIDM3MCBsMzQgMzQgMzQgLTM0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9nPjwvc3ZnPg=='
 };
 
 // クエストデータに 'character' プロパティを追加
 const quests = {
     'start': {
-        text: '勇者よ！まずは、どのような椅子を探しているか教えてくれ！',
+        text: 'たぬきち：今日はどんなイスを探してるだなも？\n使いたい場面を教えてほしいだなも。',
         choices: [
-            { text: '魔法使いの呪文のように長時間、座るための椅子（作業用）', next: 'purpose-work' },
-            { text: '休息と回復のために、ゆったりと体を預ける椅子（リラックス用）', next: 'purpose-relax' },
-            { text: '食事の時間を楽しむための、みんなで囲める椅子（ダイニング用）', next: 'purpose-dining' }
+            { text: 'おしごとやゲームがはかどるイス', next: 'purpose-work' },
+            { text: 'のんびりリラックスできるイス', next: 'purpose-relax' },
+            { text: 'みんなでごはんを楽しむイス', next: 'purpose-dining' }
         ],
-        bg: 'https://img2.lancers.jp/portfolio/308690/1677623/d6c7e9c6e1bac39c0faa7f83822c17599a79b427c6d7c4dfd258409db1bd7e5d/15613329_1000_0.png',
-        character: 'king' // 王様を表示
+        bg: islandBackgrounds.plaza,
+        character: 'tanuki'
     },
     'purpose-work': {
-        text: '作業用の椅子を求め、王国の知と技が集う街へ向かうのじゃ。どこから調査を始める？',
+        text: 'しずえ：ふむふむ。お部屋はどんな雰囲気にしたいですか？',
         choices: [
-            { text: '王立図書館で魔導書をひもとく', next: 'work-trial-library' },
-            { text: '鍛冶ギルドの工房で職人に相談する', next: 'work-trial-forge' }
+            { text: '静かに集中できる落ち着いたスペース', next: 'work-focus' },
+            { text: '色もりだくさんの楽しいコーナー', next: 'work-playful' }
         ],
-        bg: 'https://img2.lancers.jp/portfolio/308690/1677623/d6c7e9c6e1bac39c0faa7f83822c17599a79b427c6d7c4dfd258409db1bd7e5d/15613329_1000_0.png',
-        character: 'king'
+        bg: islandBackgrounds.workshop,
+        character: 'dog'
     },
-    'work-trial-library': {
-        text: '静まり返った図書館で、賢者が君を待っている。どの学びを選ぶ？',
+    'work-focus': {
+        text: 'ブーケ：姿勢が保てるとお仕事がはかどるよ！何を重視する？',
         choices: [
-            { text: '宮廷魔術師の集中講義を受ける', next: 'work-budget-mentor' },
-            { text: '研究仲間と共に討論に明け暮れる', next: 'work-budget-ally' }
+            { text: '背中までしっかり支えてほしい', next: 'result-ergonomic' },
+            { text: 'クッション性もあってゲームにも使いたい', next: 'result-gaming' }
         ],
-        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
-        character: 'wizard'
+        bg: islandBackgrounds.workshop,
+        character: 'cat'
     },
-    'work-trial-forge': {
-        text: '火花散る鍛冶ギルド。筋骨隆々の職人が姿勢の鍛え方を指南してくれる。どうする？',
+    'work-playful': {
+        text: 'たぬきち：ポップなコーナーなら、どう座りたいだなも？',
         choices: [
-            { text: '頑丈さ重視で装備を整える', next: 'work-budget-guild' },
-            { text: '姿勢矯正の訓練で体を鍛える', next: 'work-budget-guild' }
+            { text: 'リクライニングしてゆったり作業したい', next: 'result-ergonomic' },
+            { text: 'ライトアップでテンションを上げたい', next: 'result-gaming' }
         ],
-        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
-        character: 'merchant'
-    },
-    'work-budget-mentor': {
-        text: '賢者の教えは貴重だが、予算も大切だ。どれほどゴールドを費やす？',
-        choices: [
-            { text: '10,000ゴールド未満（安価）', next: 'result-gaming' },
-            { text: '10,000〜50,000ゴールド（集中力重視）', next: 'result-ergonomic' },
-            { text: '50,000ゴールド以上（最高の座り心地）', next: 'result-ergonomic' }
-        ],
-        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
-        character: 'wizard'
-    },
-    'work-budget-ally': {
-        text: '仲間の協力で装備をそろえる。皆で出し合えるのはどのくらい？',
-        choices: [
-            { text: '10,000ゴールド未満（安価）', next: 'result-gaming' },
-            { text: '10,000〜50,000ゴールド（バランス重視）', next: 'result-ergonomic' },
-            { text: '50,000ゴールド以上（最高級を求める）', next: 'result-ergonomic' }
-        ],
-        bg: 'https://img2.lancers.jp/portfolio/308690/1677623/d6c7e9c6e1bac39c0faa7f83822c17599a79b427c6d7c4dfd258409db1bd7e5d/15613329_1000_0.png',
-        character: 'king'
-    },
-    'work-budget-guild': {
-        text: '鍛冶ギルドの親方が素材を並べてくれた。どの装備を選ぶ？',
-        choices: [
-            { text: '10,000ゴールド未満（手軽なセット）', next: 'result-gaming' },
-            { text: '10,000〜50,000ゴールド（実戦向けセット）', next: 'result-ergonomic' },
-            { text: '50,000ゴールド以上（王家の特注品）', next: 'result-ergonomic' }
-        ],
-        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
-        character: 'merchant'
+        bg: islandBackgrounds.plaza,
+        character: 'tanuki'
     },
     'purpose-relax': {
-        text: '癒やしを求め、王都を離れて大自然へ。どの道を行く？',
+        text: 'しずえ：リラックスするなら、どこでくつろぎたいですか？',
         choices: [
-            { text: '森を抜けて精霊の泉を目指す', next: 'relax-journey-forest' },
-            { text: '海沿いの温泉郷へ旅立つ', next: 'relax-journey-seaside' }
+            { text: '木の香りを感じるナチュラルコーナー', next: 'relax-natural' },
+            { text: 'ふかふかクッションのまどろみ空間', next: 'relax-cozy' }
         ],
-        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
-        character: 'wizard' // 魔法使いを表示
+        bg: islandBackgrounds.coast,
+        character: 'dog'
     },
-    'relax-journey-forest': {
-        text: '森の精霊がきらめく泉に到着。精霊たちが座り心地について囁いてくる。どの声に耳を傾ける？',
+    'relax-natural': {
+        text: 'たぬきち：木のイスは島の空気によく合うだなも〜。どんな雰囲気がいい？',
         choices: [
-            { text: '木の香りをまとった風の声', next: 'relax-material-woodland' },
-            { text: '柔らかな霧の歌声', next: 'relax-material-calm' }
+            { text: '素朴な木目でお部屋になじませたい', next: 'result-wood' },
+            { text: '木枠とクッションのバランスがいいと安心', next: 'result-lounge' }
         ],
-        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
-        character: 'wizard'
+        bg: islandBackgrounds.plaza,
+        character: 'tanuki'
     },
-    'relax-journey-seaside': {
-        text: '潮騒が響く温泉郷。旅館の女将が休息の極意を伝授してくれる。どうくつろぐ？',
+    'relax-cozy': {
+        text: 'ブーケ：ふかふかだとウトウトしちゃいそう！どんな座り心地が好き？',
         choices: [
-            { text: '木のぬくもりで心身を温める', next: 'relax-material-woodland' },
-            { text: 'ふかふかの座面でとろける', next: 'relax-material-calm' }
+            { text: '包みこまれるソファタイプがいい', next: 'result-lounge' },
+            { text: '木のフレームで安定感もほしい', next: 'result-wood' }
         ],
-        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
-        character: 'king'
-    },
-    'relax-material-woodland': {
-        text: '自然と調和する椅子を選ぶなら、どんな木の表情が好きだ？',
-        choices: [
-            { text: '素朴で飾らない木肌', next: 'result-wood' },
-            { text: '温かみのある木目と布の組み合わせ', next: 'result-lounge' }
-        ],
-        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
-        character: 'wizard'
-    },
-    'relax-material-calm': {
-        text: '全身を包み込むようなくつろぎ方を想像せよ。どの感触が心を癒やす？',
-        choices: [
-            { text: '包み込むような布のクッション', next: 'result-lounge' },
-            { text: '木のフレームでしっかり支える', next: 'result-wood' }
-        ],
-        bg: 'https://pbs.twimg.com/media/DV0yLVyVQAU2G6c.jpg',
-        character: 'king'
+        bg: islandBackgrounds.coast,
+        character: 'cat'
     },
     'purpose-dining': {
-        text: '王国の宴に招かれた君は、食卓を彩る椅子を探す旅へ出る。まずはどこを訪ねる？',
+        text: 'たぬきち：みんなで食べるなら、どんな集まりか教えてだなも。',
         choices: [
-            { text: '城下町の賑やかな市場', next: 'dining-journey-market' },
-            { text: '城の庭園で開かれる晩餐会', next: 'dining-journey-garden' }
+            { text: '家族や仲良しとほっこりごはん', next: 'dining-family' },
+            { text: 'おもてなしのテーブルを華やかにしたい', next: 'dining-party' }
         ],
-        bg: 'https://t4.ftcdn.net/jpg/01/43/74/71/360_F_143747111_shWPZFZARFvYVWKpgX2r7e4tK8LVtuJb.jpg',
-        character: 'king' // 王様を表示
+        bg: islandBackgrounds.plaza,
+        character: 'tanuki'
     },
-    'dining-journey-market': {
-        text: '市場では各地の料理人が椅子自慢をしている。どの職人の声を信じる？',
+    'dining-family': {
+        text: 'しずえ：日々使うなら座りごこちや扱いやすさが大切ですね！',
         choices: [
-            { text: '職人肌の鍛冶屋が作るシンプル椅子', next: 'dining-style-hearty' },
-            { text: '宮廷料理人が薦める優雅な椅子', next: 'dining-style-noble' }
+            { text: 'お手入れしやすい頼れるイス', next: 'result-dining' },
+            { text: '木のぬくもりを感じたい', next: 'result-wood' }
         ],
-        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
-        character: 'merchant'
+        bg: islandBackgrounds.workshop,
+        character: 'dog'
     },
-    'dining-journey-garden': {
-        text: '庭園では王家の晩餐が始まろうとしている。どの席に座りたい？',
+    'dining-party': {
+        text: 'ブーケ：パーティーなら見た目も大事！どっちにときめく？',
         choices: [
-            { text: '騎士団の円卓で語らう席', next: 'dining-style-hearty' },
-            { text: '王妃の特等席で優雅に過ごす', next: 'dining-style-noble' }
+            { text: 'スッと背すじがのびる上品なイス', next: 'result-dining' },
+            { text: '木目が映えるナチュラルなイス', next: 'result-wood' }
         ],
-        bg: 'https://t4.ftcdn.net/jpg/01/43/74/71/360_F_143747111_shWPZFZARFvYVWKpgX2r7e4tK8LVtuJb.jpg',
-        character: 'king'
-    },
-    'dining-style-hearty': {
-        text: '仲間と肩を並べるなら実用性も大切だ。どんな座り心地を選ぶ？',
-        choices: [
-            { text: '丈夫で扱いやすい椅子', next: 'result-dining' },
-            { text: '木の背もたれで落ち着く椅子', next: 'result-wood' }
-        ],
-        bg: 'https://sdesignlabo.com/blog/wp-content/uploads/2022/08/ai-8bit-pixelart_02.jpg',
-        character: 'merchant'
-    },
-    'dining-style-noble': {
-        text: '晩餐会を華やかにするならば、どのような椅子が似合う？',
-        choices: [
-            { text: '背もたれの高い堂々とした椅子', next: 'result-wood' },
-            { text: '姿勢良く座れる上品な椅子', next: 'result-dining' }
-        ],
-        bg: 'https://t4.ftcdn.net/jpg/01/43/74/71/360_F_143747111_shWPZFZARFvYVWKpgX2r7e4tK8LVtuJb.jpg',
-        character: 'king'
+        bg: islandBackgrounds.coast,
+        character: 'cat'
     },
     'result-gaming': { result: 'gaming' },
     'result-ergonomic': { result: 'ergonomic' },
@@ -392,10 +333,10 @@ function showResult(chairId) {
     gameScreen.classList.remove('active');
     resultScreen.classList.add('active');
     const chair = chairs[chairId];
-    resultTitle.textContent = `伝説の椅子を発見！`;
+    resultTitle.textContent = `ぴったりのイスが見つかったよ！`;
     chairImage.src = chair.image;
-    chairName.textContent = `【名前】 ${chair.name}`;
-    chairDescription.textContent = `【特徴】 ${chair.description}`;
+    chairName.textContent = `【なまえ】 ${chair.name}`;
+    chairDescription.textContent = `【ポイント】 ${chair.description}`;
     purchaseLink.href = chair.purchase;
 
     purchaseLink.style.display = 'block';
@@ -417,8 +358,10 @@ function restartGame() {
     }
     textToneIndex = 0;
     resetArExperience();
-    // スタート画面の王様表示をリセット
-    document.querySelector('.sprite.king.start-king').style.display = 'block';
+    // スタート画面のキャラクター表示をリセット
+    if (startCharacter) {
+        startCharacter.style.display = 'block';
+    }
 }
 
 // 効果音の再生
@@ -510,7 +453,7 @@ function updateArExperience(chair) {
     }
 
     if (arDescription) {
-        arDescription.textContent = chair.ar.hint || 'スマートフォンを動かして、お部屋に配置してみましょう。';
+        arDescription.textContent = chair.ar.hint || 'お気に入りの場所でAR体験してみてね。';
     }
 
     arContainer.style.display = 'flex';
@@ -527,6 +470,6 @@ function resetArExperience() {
     chairArViewer.removeAttribute('ios-src');
 
     if (arDescription) {
-        arDescription.textContent = 'スマートフォンを動かして、お部屋に椅子を配置してみよう。';
+        arDescription.textContent = 'スマートフォンを動かして、島のお部屋にイスを置いてみよう。';
     }
 }
